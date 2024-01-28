@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import video.downloader.freevideodownloader.allinonevideodownloader.R;
 import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.yausername.youtubedl_android.YoutubeDL;
 import com.yausername.youtubedl_android.YoutubeDLRequest;
 
@@ -40,6 +43,7 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private static final String TAG = "StreamingExample";
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
 
         initViews();
         initListeners();
+        initAds();
 
         btnClearInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +68,18 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
         });
     }
 
+    private void initAds(){
+        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+
+// Find the Ad Container
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+
+// Add the ad view to your activity layout
+        adContainer.addView(adView);
+
+// Request an ad
+        adView.loadAd();
+    }
     private void initViews() {
         btnStartStream = findViewById(R.id.btn_start_streaming);
         btnClearInput = findViewById(R.id.btn_clear_input);

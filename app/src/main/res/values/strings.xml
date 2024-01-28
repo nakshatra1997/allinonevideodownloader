@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Download Any Video</string>
+    <string name="app_name">Download All Videos</string>
     <string name="btn_streaming_example">play a video</string>
     <string name="btn_downloading_example">download a video</string>
     <string name="btn_command_example">Custom Command Example</string>
@@ -11,7 +11,7 @@
     <string name="command_hint">enter command here</string>
     <string name="url_error">enter a valid url</string>
     <string name="command_error">enter a valid command</string>
-    <string name="start">Do the thing</string>
+    <string name="start">Paste the video link</string>
     <string name="example_command">Example command: --extract-audio --audio-format mp3 -o /sdcard/Download/youtubedl-android/%(title)s.%(ext)s https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
     <string name="download_start">Starting Download</string>
     <string name="download_complete">Download Complete</string>
@@ -29,4 +29,5 @@
     <string name="developer_email">primedevgroup@gmail.com</string>
     <string name="privacy_policy_url">https://pages.flycricket.io/download-any-video/privacy.html</string>
     <string name="more_apps_url">https://play.google.com/store/apps/dev?id=5417228408982511692</string>
+    <string name="icon_name">All In One Video Downloader</string>
 </resources>

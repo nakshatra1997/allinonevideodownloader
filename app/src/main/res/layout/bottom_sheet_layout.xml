@@ -81,74 +81,74 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/more_apps_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/more_apps_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_more_apps" />
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:src="@drawable/ic_more_apps" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/poppins_med"
-                android:text="More Apps"
-                android:textColor="@color/textColor"
-                android:textSize="18sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:fontFamily="@font/poppins_med"-->
+<!--                android:text="More Apps"-->
+<!--                android:textColor="@color/textColor"-->
+<!--                android:textSize="18sp" />-->
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/update_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/update_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_update" />
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:src="@drawable/ic_update" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/poppins_med"
-                android:text="Update Packages"
-                android:textColor="@color/textColor"
-                android:textSize="18sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:fontFamily="@font/poppins_med"-->
+<!--                android:text="Update Packages"-->
+<!--                android:textColor="@color/textColor"-->
+<!--                android:textSize="18sp" />-->
+<!--        </LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/contact_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/contact_container"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_contact" />
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:src="@drawable/ic_contact" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/poppins_med"
-                android:text="Contact Us"
-                android:textColor="@color/textColor"
-                android:textSize="18sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:fontFamily="@font/poppins_med"-->
+<!--                android:text="Contact Us"-->
+<!--                android:textColor="@color/textColor"-->
+<!--                android:textSize="18sp" />-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 
 </LinearLayout>
