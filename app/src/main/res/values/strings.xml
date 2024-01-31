@@ -19,8 +19,8 @@
     <string name="command_start">Starting Command</string>
     <string name="command_complete">Command Complete</string>
     <string name="command_failed">Command Failed</string>
-    <string name="use_config_file">Use Config File?</string>
-    <string name="app_version">version 0.0.1</string>
+    <string name="use_config_file"></string>
+    <string name="app_version"></string>
     <string name="small_title">Youtube, Facebook, Instagram and more...</string>
     <string name="copyright">copyright ©2022. All rights reserved</string>
     <string name="clear_input">clear input</string>

@@ -1,5 +1,7 @@
 package video.downloader.freevideodownloader.allinonevideodownloader;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -26,8 +28,13 @@ import androidx.core.app.ActivityCompat;
 
 import video.downloader.freevideodownloader.allinonevideodownloader.R;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.yausername.youtubedl_android.YoutubeDL;
 import com.yausername.youtubedl_android.YoutubeDLRequest;
 
@@ -57,6 +64,8 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     private AdView adView;
     private boolean downloading = false;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private static InterstitialAd interstitialAd;
 
     Function3<Float, Long, String, Unit> callback = new Function3<Float, Long, String, kotlin.Unit>() {
         @Override
@@ -89,9 +98,63 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
         initViews();
         initListeners();
         initAds();
+        initInterAds();
     }
 
+    private void initInterAds(){
+        AdSettings.addTestDevice("7f506ce4-03e2-4410-bf12-17dce0f1d0e3");
+        interstitialAd = new InterstitialAd(this, "YOUR_PLACEMENT_ID");
+        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial ad displayed callback
+                Log.e(  TAG, "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+                Log.e(TAG, "Interstitial ad dismissed.");
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+//                if(interstitialAd.isAdLoaded())
+//                interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d(TAG, "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d(TAG, "Interstitial ad impression logged!");
+            }
+        };
+
+//         For auto play video ads, it's recommended to load the ad
+//         at least 30 seconds before it is shown
+
+        interstitialAd.buildLoadAdConfig()
+                .withAdListener(interstitialAdListener)
+                .build();
+        interstitialAd.loadAd();
+    }
     private void initAds(){
+
         adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
 
 // Find the Ad Container
@@ -126,6 +189,7 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     }
 
     private void startDownload() {
+        initInterAds();
         if (downloading) {
             //Toast.makeText(DownloadingExampleActivity.this, "cannot start download. a download is already in progress", Toast.LENGTH_LONG).show();
             Toasty.error(DownloadingExampleActivity.this, "Cannot start download. a download is already in progress", Toast.LENGTH_LONG).show();
@@ -169,6 +233,8 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
                     tvCommandOutput.setText(youtubeDLResponse.getOut());
                     //Toast.makeText(DownloadingExampleActivity.this, "download successful", Toast.LENGTH_LONG).show();
                     Toasty.success(DownloadingExampleActivity.this, "Download successful", Toast.LENGTH_LONG).show();
+                    if(interstitialAd.isAdLoaded())
+                    interstitialAd.show();
                     downloading = false;
                 }, e -> {
                     if (BuildConfig.DEBUG) Log.e(TAG, "failed to download", e);
