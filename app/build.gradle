@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         applicationId "video.downloader.freevideodownloader.allinonevideodownloader"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode project.versionCode
         versionName project.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -68,4 +68,5 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.5.2'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'com.facebook.android:audience-network-sdk:6.+'
+    implementation 'com.onesignal:OneSignal:[5.0.0, 5.99.99]'
 }

@@ -28,6 +28,7 @@ import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.NativeBannerAd;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.onesignal.OneSignal;
 import com.yausername.youtubedl_android.YoutubeDL;
 
 import es.dmoral.toasty.Toasty;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         getSupportActionBar().setElevation(0);
         AudienceNetworkAds.initialize(this);
-
+        OneSignal.initWithContext(this, "da9f153c-e0c7-4064-80d1-86d8d2b10799");
         initViews();
         initListeners();
         initAds();
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnUpdate.setVisibility(View.GONE);
         updateYoutubeDL();
+        //onesignal
+        //da9f153c-e0c7-4064-80d1-86d8d2b10799
     }
 
     @Override

@@ -14,7 +14,7 @@
     <string name="start">Paste the video link</string>
     <string name="example_command">Example command: --extract-audio --audio-format mp3 -o /sdcard/Download/youtubedl-android/%(title)s.%(ext)s https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
     <string name="download_start">Starting Download</string>
-    <string name="download_complete">Download Complete</string>
+    <string name="download_complete">Video downloaded in video-downloads folder</string>
     <string name="download_failed">Download Failed</string>
     <string name="command_start">Starting Command</string>
     <string name="command_complete">Command Complete</string>

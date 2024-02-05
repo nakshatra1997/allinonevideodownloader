@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "1072570634660",
+    "firebase_url": "https://liter-2612d.firebaseio.com",
+    "project_id": "liter-2612d",
+    "storage_bucket": "liter-2612d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072570634660:android:c570717edc442602423131",
+        "android_client_info": {
+          "package_name": "com.classicgames.ballshooter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrqjwJEFs4rifsLKv4balViGgjmGRkyQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072570634660:android:14ebbf23c25b66f4423131",
+        "android_client_info": {
+          "package_name": "com.games.bounceball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrqjwJEFs4rifsLKv4balViGgjmGRkyQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072570634660:android:e3251a66ae1d776a423131",
+        "android_client_info": {
+          "package_name": "com.games.liter2048"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrqjwJEFs4rifsLKv4balViGgjmGRkyQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072570634660:android:010bea73b1cde996423131",
+        "android_client_info": {
+          "package_name": "video.downloader.freevideodownloader.allinonevideodownloader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrqjwJEFs4rifsLKv4balViGgjmGRkyQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072570634660-pub17jfh354tum6go8ra0qdnhk9lg9ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

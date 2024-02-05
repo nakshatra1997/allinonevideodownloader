@@ -170,7 +170,7 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     private void initViews() {
         btnStartDownload = findViewById(R.id.btn_start_download);
         etUrl = findViewById(R.id.et_url);
-        useConfigFile = findViewById(R.id.use_config_file);
+//        useConfigFile = findViewById(R.id.use_config_file);
         progressBar = findViewById(R.id.progress_bar);
         tvDownloadStatus = findViewById(R.id.tv_status);
         pbLoading = findViewById(R.id.pb_status);
@@ -212,13 +212,13 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
         File youtubeDLDir = getDownloadLocation();
         File config = new File(youtubeDLDir, "config.txt");
 
-        if (useConfigFile.isChecked() && config.exists()) {
-            request.addOption("--config-location", config.getAbsolutePath());
-        } else {
+//        if (useConfigFile.isChecked() && config.exists()) {
+//            request.addOption("--config-location", config.getAbsolutePath());
+//        } else {
             request.addOption("--no-mtime");
             request.addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best");
             request.addOption("-o", youtubeDLDir.getAbsolutePath() + "/%(title)s.%(ext)s");
-        }
+//        }
 
         showStart();
 
@@ -230,11 +230,11 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
                     pbLoading.setVisibility(View.GONE);
                     progressBar.setProgress(100);
                     tvDownloadStatus.setText(getString(R.string.download_complete));
-                    tvCommandOutput.setText(youtubeDLResponse.getOut());
+//                    tvCommandOutput.setText(youtubeDLResponse.getOut());
                     //Toast.makeText(DownloadingExampleActivity.this, "download successful", Toast.LENGTH_LONG).show();
                     Toasty.success(DownloadingExampleActivity.this, "Download successful", Toast.LENGTH_LONG).show();
                     if(interstitialAd.isAdLoaded())
-                    interstitialAd.show();
+                        interstitialAd.show();
                     downloading = false;
                 }, e -> {
                     if (BuildConfig.DEBUG) Log.e(TAG, "failed to download", e);
@@ -270,7 +270,7 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     @NonNull
     private File getDownloadLocation() {
         File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File youtubeDLDir = new File(downloadsDir, "allinone-video-downloader");
+        File youtubeDLDir = new File(downloadsDir, "video-downloads");
         if (!youtubeDLDir.exists()) youtubeDLDir.mkdir();
         return youtubeDLDir;
     }
