@@ -69,7 +69,7 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
     }
 
     private void initAds(){
-        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, "1049003839494172_1049004579494098", AdSize.BANNER_HEIGHT_50);
 
 // Find the Ad Container
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);

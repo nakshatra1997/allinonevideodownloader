@@ -21,13 +21,13 @@
     <string name="command_failed">Command Failed</string>
     <string name="use_config_file"></string>
     <string name="app_version"></string>
-    <string name="small_title">Youtube, Facebook, Instagram and more...</string>
-    <string name="copyright">copyright ©2022. All rights reserved</string>
+    <string name="small_title">Download all social media videos</string>
+    <string name="copyright">We do not encourage copyrighted material to be downloaded or shared without owner\'s consent.</string>
     <string name="clear_input">clear input</string>
-    <string name="about_message">All in one video downloader is a video utility app,That you can use to download videos from social media apps.\nFor example you can download youtube, facebook, instagram and pinterest videos.\nOur app user Youtube-dl library to download videos.</string>
+    <string name="about_message">All in one video downloader is a video utility app,that can be used to download any videos from social media apps.\n If you like the app, please do rate us 5 star on playstore.\nFeel free to mail us for any feedbacks or suggestions on our official mail id.\n We recommend users to respect copyrighted content and take owner\'s consent for distribution of such content.</string>
     <string name="developer_name">prime dev</string>
     <string name="developer_email">primedevgroup@gmail.com</string>
-    <string name="privacy_policy_url">https://pages.flycricket.io/download-any-video/privacy.html</string>
-    <string name="more_apps_url">https://play.google.com/store/apps/dev?id=5417228408982511692</string>
+    <string name="privacy_policy_url">https://docs.google.com/document/d/1Ou1GieBNwPZwqPzSGCp9n6Th4nCQaFkXHV3_9_6DHew/edit?usp=sharing</string>
+    <string name="more_apps_url">https://play.google.com/store/apps/developer?id=Prime+Dev+Group</string>
     <string name="icon_name">All In One Video Downloader</string>
 </resources>

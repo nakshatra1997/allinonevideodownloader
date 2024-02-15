@@ -102,8 +102,8 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     }
 
     private void initInterAds(){
-        AdSettings.addTestDevice("7f506ce4-03e2-4410-bf12-17dce0f1d0e3");
-        interstitialAd = new InterstitialAd(this, "YOUR_PLACEMENT_ID");
+//        AdSettings.addTestDevice("7f506ce4-03e2-4410-bf12-17dce0f1d0e3");
+        interstitialAd = new InterstitialAd(this, "1049003839494172_1049004882827401");
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -155,7 +155,7 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
     }
     private void initAds(){
 
-        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, "1049003839494172_1049004579494098", AdSize.BANNER_HEIGHT_50);
 
 // Find the Ad Container
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
@@ -227,9 +227,10 @@ public class DownloadingExampleActivity extends AppCompatActivity implements Vie
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(youtubeDLResponse -> {
-                    pbLoading.setVisibility(View.GONE);
+
                     progressBar.setProgress(100);
                     tvDownloadStatus.setText(getString(R.string.download_complete));
+                    pbLoading.setVisibility(View.GONE);
 //                    tvCommandOutput.setText(youtubeDLResponse.getOut());
                     //Toast.makeText(DownloadingExampleActivity.this, "download successful", Toast.LENGTH_LONG).show();
                     Toasty.success(DownloadingExampleActivity.this, "Download successful", Toast.LENGTH_LONG).show();

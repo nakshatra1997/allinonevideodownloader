@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initAds(){
-        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, "1049003839494172_1049004579494098", AdSize.BANNER_HEIGHT_50);
 
 // Find the Ad Container
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
@@ -195,11 +195,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showAboutDialog() {
         //show dialog
         String about = getString(R.string.about_message);
-        String version = "Version: " + BuildConfig.VERSION_NAME;
-        String message = about + "\n\n" + version;
+//        String version = "Version: " + BuildConfig.VERSION_NAME;
+//        String message = about + "\n\n" + version;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("About");
-        builder.setMessage(message);
+        builder.setMessage(about);
         builder.setPositiveButton("Close", null);
         builder.show();
     }
