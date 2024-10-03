@@ -16,8 +16,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-
-import video.downloader.freevideodownloader.allinonevideodownloader.R;
 import com.yausername.youtubedl_android.DownloadProgressCallback;
 import com.yausername.youtubedl_android.YoutubeDL;
 import com.yausername.youtubedl_android.YoutubeDLRequest;
@@ -29,12 +27,10 @@ import java.util.regex.Pattern;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import video.downloader.freevideodownloader.allinonevideodownloader.BuildConfig;
 
-
-public class CommandExampleActivity extends AppCompatActivity implements View.OnClickListener {
+public class CommandExampleActivity extends AppCompatActivity {
 
     private Button btnRunCommand;
     private EditText etCommand;
@@ -46,16 +42,11 @@ public class CommandExampleActivity extends AppCompatActivity implements View.On
     private boolean running = false;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private final DownloadProgressCallback callback = new DownloadProgressCallback() {
-        @Override
-        public void onProgressUpdate(float progress, long etaInSeconds, String line) {
-            runOnUiThread(() -> {
-                        progressBar.setProgress((int) progress);
-                        tvCommandStatus.setText(line);
-                    }
-            );
-        }
-    };
+    // Lambda expression for progress callback
+    private final DownloadProgressCallback callback = (progress, etaInSeconds, line) -> runOnUiThread(() -> {
+        progressBar.setProgress((int) progress);
+        tvCommandStatus.setText(line);
+    });
 
     private static final String TAG = CommandExampleActivity.class.getSimpleName();
 
@@ -78,24 +69,17 @@ public class CommandExampleActivity extends AppCompatActivity implements View.On
     }
 
     private void initListeners() {
-        btnRunCommand.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.btn_run_command) {
-            runCommand();
-        }
+        btnRunCommand.setOnClickListener(v -> runCommand());
     }
 
     private void runCommand() {
         if (running) {
-            Toast.makeText(CommandExampleActivity.this, "cannot start command. a command is already in progress", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "cannot start command. a command is already in progress", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (!isStoragePermissionGranted()) {
-            Toast.makeText(CommandExampleActivity.this, "grant storage permission and retry", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "grant storage permission and retry", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -105,42 +89,43 @@ public class CommandExampleActivity extends AppCompatActivity implements View.On
             return;
         }
 
-        // this is not the recommended way to add options/flags/url and might break in future
-        // use the constructor for url, addOption(key) for flags, addOption(key, value) for options
         YoutubeDLRequest request = new YoutubeDLRequest(Collections.emptyList());
-        String commandRegex = "\"([^\"]*)\"|(\\S+)";
-        Matcher m = Pattern.compile(commandRegex).matcher(command);
-        while (m.find()) {
+        Matcher matcher = Pattern.compile("\"([^\"]*)\"|(\\S+)").matcher(command);
+        matcher.results().forEach(m -> {
             if (m.group(1) != null) {
                 request.addOption(m.group(1));
             } else {
                 request.addOption(m.group(2));
             }
-        }
+        });
 
         showStart();
 
         running = true;
-        Disposable disposable = Observable.fromCallable(() -> YoutubeDL.getInstance().execute(request, callback.toString()))
-                .subscribeOn(Schedulers.newThread())
+        compositeDisposable.add(
+            Observable.fromCallable(() -> YoutubeDL.getInstance().execute(request, callback.toString()))
+                .subscribeOn(Schedulers.io()) // Changed to `io()` scheduler for better thread management
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(youtubeDLResponse -> {
-                    pbLoading.setVisibility(View.GONE);
-                    progressBar.setProgress(100);
-                    tvCommandStatus.setText(getString(R.string.command_complete));
-                    tvCommandOutput.setText(youtubeDLResponse.getOut());
-                    Toast.makeText(CommandExampleActivity.this, "command successful", Toast.LENGTH_LONG).show();
-                    running = false;
-                }, e -> {
-                    if (BuildConfig.DEBUG) Log.e(TAG, "command failed", e);
-                    pbLoading.setVisibility(View.GONE);
-                    tvCommandStatus.setText(getString(R.string.command_failed));
-                    tvCommandOutput.setText(e.getMessage());
-                    Toast.makeText(CommandExampleActivity.this, "command failed", Toast.LENGTH_LONG).show();
-                    running = false;
-                });
-        compositeDisposable.add(disposable);
+                .subscribe(response -> handleSuccess(response), this::handleError)
+        );
+    }
 
+    private void handleSuccess(YoutubeDLResponse response) {
+        pbLoading.setVisibility(View.GONE);
+        progressBar.setProgress(100);
+        tvCommandStatus.setText(getString(R.string.command_complete));
+        tvCommandOutput.setText(response.getOut());
+        Toast.makeText(this, "command successful", Toast.LENGTH_LONG).show();
+        running = false;
+    }
+
+    private void handleError(Throwable e) {
+        if (BuildConfig.DEBUG) Log.e(TAG, "command failed", e);
+        pbLoading.setVisibility(View.GONE);
+        tvCommandStatus.setText(getString(R.string.command_failed));
+        tvCommandOutput.setText(e.getMessage());
+        Toast.makeText(this, "command failed", Toast.LENGTH_LONG).show();
+        running = false;
     }
 
     @Override
