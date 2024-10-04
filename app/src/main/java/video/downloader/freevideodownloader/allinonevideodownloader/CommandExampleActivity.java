@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import com.yausername.youtubedl_android.DownloadProgressCallback;
 import com.yausername.youtubedl_android.YoutubeDL;
 import com.yausername.youtubedl_android.YoutubeDLRequest;
+import com.yausername.youtubedl_android.YoutubeDLResponse;
 
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -35,20 +36,18 @@ public class CommandExampleActivity extends AppCompatActivity {
     private Button btnRunCommand;
     private EditText etCommand;
     private ProgressBar progressBar;
-    private TextView tvCommandStatus;
-    private TextView tvCommandOutput;
+    private TextView tvCommandStatus, tvCommandOutput;
     private ProgressBar pbLoading;
 
-    private boolean running = false;
+    private boolean isCommandRunning = false;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private static final String TAG = CommandExampleActivity.class.getSimpleName();
 
-    // Lambda expression for progress callback
+    // Progress callback for YoutubeDL download progress
     private final DownloadProgressCallback callback = (progress, etaInSeconds, line) -> runOnUiThread(() -> {
         progressBar.setProgress((int) progress);
         tvCommandStatus.setText(line);
     });
-
-    private static final String TAG = CommandExampleActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +68,17 @@ public class CommandExampleActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        btnRunCommand.setOnClickListener(v -> runCommand());
+        btnRunCommand.setOnClickListener(v -> handleRunCommand());
     }
 
-    private void runCommand() {
-        if (running) {
-            Toast.makeText(this, "cannot start command. a command is already in progress", Toast.LENGTH_LONG).show();
+    private void handleRunCommand() {
+        if (isCommandRunning) {
+            showToast(getString(R.string.command_in_progress_error));
             return;
         }
 
         if (!isStoragePermissionGranted()) {
-            Toast.makeText(this, "grant storage permission and retry", Toast.LENGTH_LONG).show();
+            showToast(getString(R.string.grant_storage_permission_error));
             return;
         }
 
@@ -89,6 +88,16 @@ public class CommandExampleActivity extends AppCompatActivity {
             return;
         }
 
+        YoutubeDLRequest request = parseCommand(command);
+        if (request == null) {
+            showToast(getString(R.string.command_parse_error));
+            return;
+        }
+
+        executeCommand(request);
+    }
+
+    private YoutubeDLRequest parseCommand(String command) {
         YoutubeDLRequest request = new YoutubeDLRequest(Collections.emptyList());
         Matcher matcher = Pattern.compile("\"([^\"]*)\"|(\\S+)").matcher(command);
         matcher.results().forEach(m -> {
@@ -98,34 +107,37 @@ public class CommandExampleActivity extends AppCompatActivity {
                 request.addOption(m.group(2));
             }
         });
+        return request;
+    }
 
+    private void executeCommand(YoutubeDLRequest request) {
         showStart();
+        isCommandRunning = true;
 
-        running = true;
         compositeDisposable.add(
             Observable.fromCallable(() -> YoutubeDL.getInstance().execute(request, callback.toString()))
-                .subscribeOn(Schedulers.io()) // Changed to `io()` scheduler for better thread management
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> handleSuccess(response), this::handleError)
+                .subscribe(this::handleCommandSuccess, this::handleCommandError)
         );
     }
 
-    private void handleSuccess(YoutubeDLResponse response) {
+    private void handleCommandSuccess(YoutubeDLResponse response) {
         pbLoading.setVisibility(View.GONE);
         progressBar.setProgress(100);
         tvCommandStatus.setText(getString(R.string.command_complete));
         tvCommandOutput.setText(response.getOut());
-        Toast.makeText(this, "command successful", Toast.LENGTH_LONG).show();
-        running = false;
+        showToast(getString(R.string.command_success));
+        isCommandRunning = false;
     }
 
-    private void handleError(Throwable e) {
-        if (BuildConfig.DEBUG) Log.e(TAG, "command failed", e);
+    private void handleCommandError(Throwable throwable) {
+        if (BuildConfig.DEBUG) Log.e(TAG, "Command failed", throwable);
         pbLoading.setVisibility(View.GONE);
         tvCommandStatus.setText(getString(R.string.command_failed));
-        tvCommandOutput.setText(e.getMessage());
-        Toast.makeText(this, "command failed", Toast.LENGTH_LONG).show();
-        running = false;
+        tvCommandOutput.setText(throwable.getMessage());
+        showToast(getString(R.string.command_failure));
+        isCommandRunning = false;
     }
 
     @Override
@@ -140,17 +152,19 @@ public class CommandExampleActivity extends AppCompatActivity {
         pbLoading.setVisibility(View.VISIBLE);
     }
 
-    public boolean isStoragePermissionGranted() {
+    private boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        } else {
-            return true;
         }
+        return true;
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
